@@ -10,7 +10,7 @@ anyhow = { version = "1.0.57", features = ["backtrace"] }
 async-std = { version = "1.11.0", features = ["attributes"] }
 base64 = "0.13.0"
 chrono = "0.4.19"
-clap = { version = "3.1.12", features = ["derive"] }
+clap = { version = "3.1.12", features = ["derive", "env"] }
 rust-crypto = "0.2.36"
 serde = { version = "1.0.136", features = ["derive"] }
 serde_json = "1.0.79"

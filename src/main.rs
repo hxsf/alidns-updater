@@ -5,7 +5,6 @@ use clap::Parser;
 use tide::{Body, Request};
 use tide::prelude::*;
 use tide_tracing::TraceMiddleware;
-use tracing_subscriber::fmt::format;
 
 use crate::alidns::AliDNS;
 
@@ -26,14 +25,14 @@ struct State {
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
 struct Args {
-    #[clap(short, long)]
+    #[clap(short, long, env="DOMAIN")]
     domain: String,
 
-    #[clap(short, long)]
+    #[clap(short, long, env="ALI_KEY")]
     key: String,
-    #[clap(short, long)]
+    #[clap(short, long, env="ALI_SECRET")]
     secret: String,
-    #[clap(short, long)]
+    #[clap(short, long, env, default_value_t=8080)]
     port: u16,
 }
 

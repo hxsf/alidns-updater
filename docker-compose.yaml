@@ -1,0 +1,12 @@
+version: 2
+services:
+    alidns-updater:
+        image: hxsf/alidns-updater:1.1.0
+        container_name: alidns-updater
+        environment:
+            - ALI_KEY=<your-aliyun-key> # required, or pass by -k --key flag
+            - ALI_SECRET=<your-aliyun-secret> # required, or pass by -s --secret flag
+            - DOMAIN=<your-domain> # required, or pass by -d --domain flag
+            - PORT=<listen port> # optional, or pass by -p --port flag, default is 8080.
+        ports:
+            - "8081:8081"
