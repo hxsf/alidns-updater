@@ -6,15 +6,13 @@ WORKDIR /code
 
 RUN  --mount=type=cache,target=/usr/local/cargo/registry \
     --mount=type=cache,target=/code/target \
-    sed -i 's/dl-cdn\.alpinelinux\.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk add --no-cache musl-dev ca-certificates \
-    && cargo build --release --target x86_64-unknown-linux-musl \
+    apk add --no-cache musl-dev ca-certificates \
+    && RUSTFLAGS="-C target-feature=+crt-static" cargo build --release --target x86_64-unknown-linux-musl \
     && cp /code/target/x86_64-unknown-linux-musl/release/alidns-updater /alidns-updater
 
 FROM alpine:3
 
-RUN sed -i 's/dl-cdn\.alpinelinux\.org/mirrors.aliyun.com/g' /etc/apk/repositories \
-    && apk add --no-cache bash ca-certificates tzdata \
+RUN apk add --no-cache bash ca-certificates tzdata \
     && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && echo 'Asia/Shanghai' > /etc/timezone
 COPY --from=builder /alidns-updater /alidns-updater

@@ -1,7 +1,7 @@
-version: 2
+version: "2"
 services:
     alidns-updater:
-        image: hxsf/alidns-updater:1.1.0
+        image: hxsf/alidns-updater:1
         container_name: alidns-updater
         environment:
             - ALI_KEY=<your-aliyun-key> # required, or pass by -k --key flag
